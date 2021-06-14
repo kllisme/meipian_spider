@@ -17,8 +17,8 @@ if __name__ == '__main__':
         o = options.Options()
         # o.headless = True
         driver = webdriver.Chrome(options=o)
-        # driver.get("https://www.meipian.cn")
-        driver.get("https://www.meipian.cn/3nimgip8?share_depth=1")
+        driver.get("https://www.meipian.cn")
+        # driver.get("https://www.meipian.cn/3nimgip8?share_depth=1")
 
         login_frame = driver.find_element_by_xpath('//iframe[@src="/officialWebsiteLogin"]')
         driver.switch_to.frame(login_frame)
@@ -36,23 +36,22 @@ if __name__ == '__main__':
 
         login_button = driver.find_element_by_xpath('//button[string()="登录"]')
         driver.execute_script("arguments[0].click();", login_button)
+        time.sleep(3)
 
         driver.switch_to.default_content()
-        driver.implicitly_wait(5)
-        i = 1
-        while i:
-            card_list = driver.find_elements_by_class_name("mp-card")
-            for article_card in card_list:
-                share = article_card.find_element_by_class_name("share")
+        flag = True
+        while flag:
+            shares = driver.find_elements_by_class_name("share")
+            for share in shares:
                 driver.execute_script("arguments[0].click();", share)
                 url = driver.find_element_by_xpath('//button[string()="复制链接"]').get_attribute("data-clipboard-text")
                 print(url)
-            next_button_s = driver.find_elements_by_class_name("btn-next")
-            if len(next_button_s) != 0 and next_button_s[0].is_enabled():
-                driver.execute_script("arguments[0].click();", next_button_s[0])
-                i = i-1
+            next_button = driver.find_element_by_class_name("btn-next")
+            next_button.get_attribute('text')
+            if next_button.is_enabled():
+                driver.execute_script("arguments[0].click();", next_button)
             else:
-                break
+                flag = False
     except Exception as e:
         print(e)
         exit()

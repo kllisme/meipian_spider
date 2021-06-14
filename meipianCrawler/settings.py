@@ -14,9 +14,9 @@ NEWSPIDER_MODULE = 'meipianCrawler.spiders'
 
 from shutil import which
 
-SELENIUM_DRIVER_NAME = 'firefox'
-SELENIUM_DRIVER_EXECUTABLE_PATH = which('geckodriver')
-SELENIUM_DRIVER_ARGUMENTS=['-headless']  # '--headless' if using chrome instead of firefox
+SELENIUM_DRIVER_NAME = 'chrome'
+SELENIUM_DRIVER_EXECUTABLE_PATH = which('chromedriver')
+SELENIUM_DRIVER_ARGUMENTS=['--headless']  # '--headless' if using chrome instead of firefox
 
 # '-headless'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -72,6 +72,7 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'meipianCrawler.pipelines.PrintJsonPipeline': 300,
+    'meipianCrawler.pipelines.PrintXLSXPipeline': 400,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
