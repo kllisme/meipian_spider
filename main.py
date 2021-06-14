@@ -3,14 +3,11 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import time
-from  time import  sleep
+
 from selenium import webdriver
 from selenium.webdriver.chrome import options
 
-
 # Press the green button in the gutter to run the script.
-from selenium.webdriver import ActionChains
-from selenium.webdriver.common.keys import Keys
 
 if __name__ == '__main__':
     try:
